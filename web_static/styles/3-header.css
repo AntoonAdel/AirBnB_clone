@@ -1,5 +1,5 @@
 header{
-    color: white;
+    color: #FFFFFF;
     height: 70px;
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
@@ -8,7 +8,7 @@ header{
 }
 
 header::before{
-    content: url(../images/logo.png);
+    content: url(../images/the_logo.png);
     display: flex;
     align-items: center;
     margin-left: 20px;

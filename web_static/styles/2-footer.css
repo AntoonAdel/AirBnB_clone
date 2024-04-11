@@ -1,11 +1,10 @@
-/*Styling the footer */
 footer{
-    background-color: green;
+    background-color: #00FF00;
 	height: 60px;
     width: 100%;
     text-align: center;
     position: fixed;
-    bottom: 0%;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
