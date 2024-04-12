@@ -2,6 +2,8 @@
 """
 The console, to manage everything
 """
+
+
 import cmd
 from models.base_model import BaseModel
 from models.user import User
@@ -15,6 +17,7 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """Contains functionality of the console"""
+
     intro = 'Welcome to the interpreter! Type help or ? to list commands.\n'
     prompt = '(hbnb) '
     classes = {
@@ -27,8 +30,9 @@ class HBNBCommand(cmd.Cmd):
             'Review': Review
             }
 
-    def do_create(self, line):
+    def creation(self, line):
         """Creates a new object"""
+
         if len(line) == 0:
             print("** class name missing **")
         elif line not in self.__class__.classes.keys():
@@ -38,11 +42,13 @@ class HBNBCommand(cmd.Cmd):
             obj.save()
             print(obj.id)
 
-    def do_show(self, line):
-        """ Prints the string representation of an instance
+    def showing(self, line):
+        """
+        Prints the string representation of an instance
         Args:
             line -> Class id ( In that order)
         """
+
         class_object = line.split(" ")
         if len(line) == 0:
             print("** class name missing **")
@@ -62,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
                 obj = all_instances[key]
                 print(str(obj))
 
-    def do_update(self, line):
+    def updating(self, line):
         """Updates attributes of an object"""
         updates = line.split(" ")
         if len(line) == 0:
@@ -88,8 +94,8 @@ class HBNBCommand(cmd.Cmd):
                 setattr(obj, updates[2], updates[3])
                 storage.save()
 
-    def do_destroy(self, args):
-        """Destroys an object based on the Class Name and ID"""
+    def destruction(self, args):
+        """ Destroys an object based on the Class Name and ID """
 
         target_list = args.split(" ")
         if len(args) == 0:
@@ -111,8 +117,9 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, line):
-        """Print string representation of all instances"""
-        obj_list = []
+        """ Print string representation of all instances """
+
+        object_list = []
         objs = storage.all()
         try:
             if len(line) != 0:
@@ -127,34 +134,34 @@ class HBNBCommand(cmd.Cmd):
             if len(line) != 0:
                 if type(val) is eval(line):
                     val = str(objs[key])
-                    obj_list.append(val)
+                    object_list.append(val)
             else:
                 val = str(objs[key])
-                obj_list.append(val)
-        print(obj_list)
+                object_list.append(val)
+        print(object_list)
 
-    def emptyline(self):
-        """Overwrite default behavior to repeat last cmd"""
+    def empty_line(self):
+        """ Overwrite default behavior to repeat last cmd """
         pass
 
     def do_operations(self, args):
-        """Do operations on objects"""
+        """ Do operations on objects """
 
-    def do_EOF(self, arg):
+    def do_EOF(self, args):
         """ Handles EOF to exit program """
         print()
         return True
 
-    def do_quit(self, args):
-        """Quits the interpreter"""
+    def quit(self, args):
+        """ Quits the interpreter """
         raise SystemExit
 
-    def do_count(self, arg):
-        """Count all instances of a class"""
+    def counter(self, args):
+        """ Count all instances of a class """
         to_count = args.split(" ")
         instances = 0
-        for obj_ in models.storage.all().values():
-            if to_count[0] == type(obj_).__name__:
+        for object_ in models.storage.all().values():
+            if to_count[0] == type(object_).__name__:
                 instances += 1
         print(instances)
 

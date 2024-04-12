@@ -1,6 +1,6 @@
 #!/usr/bin/python3
+""" Review model that inherits from the BaseModel """
 
-"""Review model that inherits from the BaseModel"""
 
 from models.base_model import BaseModel
 
@@ -13,6 +13,7 @@ class Review(BaseModel):
         user_id (str) -> User.id ( Reviwer)
         text (str) -> The review text
     """
+
     place_id = ""
     user_id = ""
     text = ""

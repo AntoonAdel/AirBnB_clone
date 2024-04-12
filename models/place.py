@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-
 """Places model, inheritting from the BaseModel"""
+
 
 from models.base_model import BaseModel
 
@@ -21,6 +21,7 @@ class Place(BaseModel):
         longitude (float) -> Geographical longitude
         amenity_ids (list) -> list of strings of ameninty ID's
     """
+
     city_id = ""
     user_id = ""
     name = ""

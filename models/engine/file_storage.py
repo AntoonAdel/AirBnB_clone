@@ -1,7 +1,9 @@
 #!/usr/bin/python3
-"""serializes instances to a JSON file and
-    deserializes JSON file to instances
 """
+serializes instances to a JSON file and
+deserializes JSON file to instances
+"""
+
 
 import json
 import os
@@ -15,11 +17,13 @@ from models.review import Review
 
 
 class FileStorage:
-    """ File storage Engine
+    """
+    File storage Engine
     class Attributes:
         __file_path(str) ->  path to the JSON file
         __objects(dict) ->   store all objects by <class name>.id
     """
+
     __file_path = "file.json"
     __objects = {}
     classes = {
@@ -33,11 +37,12 @@ class FileStorage:
     }
 
     def all(self):
-        """Returns the dictionary __objects"""
+        """ Returns the dictionary __objects """
         return self.__class__.__objects
 
     def new(self, obj):
-        """sets in __objects the obj with key <obj class name>.id
+        """
+        sets in __objects the obj with key <obj class name>.id
         Args:
             obj(object) -> The object to add to __objects
         """
@@ -45,7 +50,7 @@ class FileStorage:
         self.__class__.__objects[key] = obj
 
     def save(self):
-        """serializes __objects to the JSON file (path: __file_path)"""
+        """ serializes __objects to the JSON file (path: __file_path) """
         objects_dict = {}
         for key, value in self.__class__.__objects.items():
             objects_dict[key] = value.to_dict()
@@ -53,12 +58,13 @@ class FileStorage:
             json.dump(objects_dict, storage)
 
     def reload(self):
-        """deserializes the JSON file to __objects
+        """
+        deserializes the JSON file to __objects
         (only if the JSON file (__file_path) exists ; otherwise, do nothing
         """
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="UTF-8") as f:
-                new_dict = json.load(f)
-                for key, value in new_dict.items():
+            with open(FileStorage.__file_path, "r", encoding="UTF-8") as the_file:
+                new_obj_dict = json.load(the_file)
+                for key, value in new_obj_dict.items():
                     base = FileStorage.classes[value["__class__"]](**value)
                     FileStorage.__objects[key] = base
